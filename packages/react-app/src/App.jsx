@@ -6,10 +6,11 @@ import { Row, Col } from "antd";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useUserAddress, useBalance } from "eth-hooks";
-import { useExchangePrice, useGasPrice, useUserProvider } from "./hooks";
+import { useExchangePrice, useGasPrice, useUserProvider, useContractLoader } from "./hooks";
 import { Header, Account, Faucet, Ramp, Contract } from "./components";
 import Hints from "./Hints";
 import { INFURA_ID } from "./constants";
+import {TokenBalance} from "./components";
 
 const web3Modal = new Web3Modal({
   // network: "mainnet", // optional
@@ -72,7 +73,7 @@ function App() {
     <div className="App">
       <Header />
 
-      <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
+      <div style={{ position: "fixed", border: "1px dashed gray", zIndex: 1000, backgroundColor: "white", textAlign: "right", right: 0, top: 0, padding: 10 }}>
         <Account
           address={address}
           localProvider={localChainProvider}
@@ -83,7 +84,10 @@ function App() {
           loadWeb3Modal={loadWeb3Modal}
           logoutOfWeb3Modal={logoutOfWeb3Modal}
         />
+        <TokenBalance address={address} contracts={useContractLoader(userProvider)} name="ERC677" img={"Token balance: "}/>
+
       </div>
+
 
       {/*
           🎛 this scaffolding is full of commonly used components
@@ -91,9 +95,12 @@ function App() {
           and give you a form to interact with it locally
       */}
 
-      <Contract name="YourContract" provider={userProvider} address={address} />
+      <Contract name="MainContract" provider={userProvider} address={address} />
+
+      <Contract name="ERC677" provider={userProvider} address={address} />
 
       <Hints address={address} yourLocalBalance={yourLocalBalance} price={price} mainnetProvider={mainnetProvider} />
+
 
       <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
         <Row align="middle" gutter={4}>

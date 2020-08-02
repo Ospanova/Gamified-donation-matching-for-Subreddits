@@ -20,6 +20,7 @@ export default function TokenBalance(props) {
     const etherBalance = formatEther(usingBalance);
     parseFloat(etherBalance).toFixed(2);
     floatBalance = parseFloat(etherBalance);
+    console.log(etherBalance, usingBalance);
   }
 
   let displayBalance = floatBalance.toFixed(4);
