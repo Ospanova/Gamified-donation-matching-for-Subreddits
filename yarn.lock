@@ -1890,10 +1890,10 @@
     safe-buffer "^5.1.1"
     util.promisify "^1.0.0"
 
-"@openzeppelin/contracts@^2.4.0", "@openzeppelin/contracts@^2.5.1":
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-2.5.1.tgz#c76e3fc57aa224da3718ec351812a4251289db31"
-  integrity sha512-qIy6tLx8rtybEsIOAlrM4J/85s2q2nPkDqj/Rx46VakBZ0LwtFhXIVub96LXHczQX0vaqmAueDqNPXtbSXSaYQ==
+"@openzeppelin/contracts@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-3.1.0.tgz#bcea457ef89069fbe5a617f50b25b6a8272895d5"
+  integrity sha512-dVXDnUKxrAKLzPdCRkz+N8qsVkK1XxJ6kk3zuI6zaQmcKxN7CkizoDP7lXxcs/Mi2I0mxceTRjJBqlzFffLJrQ==
 
 "@ramp-network/ramp-instant-sdk@^1.8.1":
   version "1.8.1"
@@ -1938,13 +1938,6 @@
     hosted-git-info "^2.6.0"
     path-browserify "^1.0.0"
     url "^0.11.0"
-
-"@rsksmart/erc677@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@rsksmart/erc677/-/erc677-1.0.2.tgz#cd05174d2382872e6a349ed4ad0757336e3fcb7b"
-  integrity sha512-BBr6gI4fJh/fj4PdldgAQ+eub6NieNum99HOZtMQ2efl56xQmOuggcfF9XD7+TNjnbQ8A6u+Kh4hFizcTMm4mA==
-  dependencies:
-    "@openzeppelin/contracts" "^2.4.0"
 
 "@sentry/apm@5.20.1":
   version "5.20.1"
