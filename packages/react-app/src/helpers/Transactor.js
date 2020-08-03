@@ -38,7 +38,7 @@ export default function Transactor(provider, gasPrice, etherscan) {
             tx.gasPrice = gasPrice || parseUnits("4.1", "gwei");
           }
           if (!tx.gasLimit) {
-            tx.gasLimit = hexlify(120000);
+            tx.gasLimit = hexlify(250000);
           }
           console.log("RUNNING TX", tx);
           result = await signer.sendTransaction(tx);

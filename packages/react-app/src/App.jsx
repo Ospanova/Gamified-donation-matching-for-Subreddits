@@ -10,7 +10,7 @@ import { useExchangePrice, useGasPrice, useUserProvider, useContractLoader } fro
 import { Header, Account, Faucet, Ramp, Contract, MainContract } from "./components";
 import Hints from "./Hints";
 import { INFURA_ID } from "./constants";
-import {TokenBalance} from "./components";
+import { TokenBalance } from "./components";
 
 const web3Modal = new Web3Modal({
   // network: "mainnet", // optional
@@ -102,7 +102,7 @@ function App() {
       {
         //<Hints address={address} yourLocalBalance={yourLocalBalance} price={price} mainnetProvider={mainnetProvider} />
       }
-      
+
       <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
         <Row align="middle" gutter={4}>
           <Col span={9}>

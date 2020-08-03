@@ -5,7 +5,7 @@ import Account from "./Account";
 import DisplayVariable from "./Contract/DisplayVariable";
 import FunctionForm from "./Contract/FunctionForm";
 import Address from "./Address";
-import { Row, Col, Divider } from "antd";
+import { Row, Col, Divider, Skeleton } from "antd";
 import { Transactor } from "../helpers";
 import tryToDisplay from "./Contract/utils";
 import { formatUnits } from "@ethersproject/units";
@@ -39,15 +39,17 @@ export default function MainContract({ account, gasPrice, provider, price }) {
   const ownerAddress = useContractReader(contracts, "MainContract", "owner", 1777);
   const tokenAddress = useContractReader(contracts, "MainContract", "tokenAddress", 1777);
   const numberOfProjects = useContractReader(contracts, "MainContract", "numberOfProjects", 1777);
+  const totalEth = useContractReader(contracts, "MainContract", "totalEth", 1777);
+  const totalTokens = useContractReader(contracts, "MainContract", "totalTokens", 1777);
 
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState();
 
   const refreshProjects = useCallback(async () => {
     try {
-      let np = projects.slice();
-      for (let i = projects.length; i < numberOfProjects; i++)
+      let np = projects ? projects.slice() : [];
+      for (let i = projects ? projects.length : 0; i < numberOfProjects; i++)
         np.push(await contract.getProjectInfoById(i));
-      console.log("QQQQ", projects, np, numberOfProjects);
+      console.log("UPD", np);
       setProjects(np);
     } catch (e) {
       console.log(e);
@@ -138,11 +140,47 @@ export default function MainContract({ account, gasPrice, provider, price }) {
                   fontSize: 24,
                 }}
               >
+                {"Total ETH donated"}
+              </Col>
+              <Col span={14} style={{fontSize: 24}}>
+                {totalEth ? formatUnits(totalEth, "ether") : "..."}
+              </Col>
+            </Row>
+            <Divider />
+
+            <Row>
+              <Col
+                span={8}
+                style={{
+                  textAlign: "right",
+                  opacity: 0.333,
+                  paddingRight: 6,
+                  fontSize: 24,
+                }}
+              >
+                {"Total TOKENS donated"}
+              </Col>
+              <Col span={14} style={{fontSize: 24}}>
+                {totalTokens ? formatUnits(totalTokens, "ether")  : "..."}
+              </Col>
+            </Row>
+            <Divider />
+
+            <Row>
+              <Col
+                span={8}
+                style={{
+                  textAlign: "right",
+                  opacity: 0.333,
+                  paddingRight: 6,
+                  fontSize: 24,
+                }}
+              >
                 Projects
               </Col>
               <Col span={14} style={{
                 textAlign: "left",
-                fontSize: 18,
+                fontSize: 20,
               }}>
                 {projects.map((p, id) => (
                   <Row>
@@ -151,7 +189,7 @@ export default function MainContract({ account, gasPrice, provider, price }) {
                     <li><b>Desc: </b> {p[1]}</li>
                     <li><b>By: </b> {p[2]}</li>
                     <li>
-                      <b>Donated: </b> {formatUnits(p[3], "ether")}
+                      <b>Donated: </b> {formatUnits(p[3], "ether")} tokens & {formatUnits(p[4], "ether")} ether
                       <a href="#" onClick={() => {refreshProject(id)}}>
                          🔄
                       </a>
@@ -176,7 +214,7 @@ export default function MainContract({ account, gasPrice, provider, price }) {
         )
     }
     return <div />;
-  }, [contract, gasPrice, provider, ownerAddress, tokenAddress, numberOfProjects]);
+  }, [contract, gasPrice, provider, ownerAddress, tokenAddress, numberOfProjects, projects]);
 
   return (
     <div style={{ margin: "auto", width: "70vw" }}>
