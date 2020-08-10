@@ -28,7 +28,7 @@ export default function AddProject({ isActive, openAddProjectForm, closeAddProje
     }
 
     const inputs = functionInfo.inputs.map(input => (
-        <div style={{ margin: 2 }}>
+        <div style={{ margin: 2, width: 1000}}   >
             <Input
                 size="large"
                 placeholder={input.name}
@@ -39,7 +39,7 @@ export default function AddProject({ isActive, openAddProjectForm, closeAddProje
     ));
 
     const txValueInput = (
-        <div style={{ margin: 2 }}>
+        <div style={{ margin: 2, width: 1000 }}>
             <Input
                 placeholder="transaction value"
                 onChange={e => setTxValue(e.target.value)}
@@ -47,7 +47,7 @@ export default function AddProject({ isActive, openAddProjectForm, closeAddProje
                 addonAfter={
                     <div>
                         <Row>
-                            <Col span={16}>
+                            <Col span={40}>
                                 <Tooltip placement="right" title={" * 10^18 "}>
                                     <div
                                         type="dashed"
@@ -85,7 +85,7 @@ export default function AddProject({ isActive, openAddProjectForm, closeAddProje
 
     const buttonIcon = functionInfo.type === "call" ? "📡" : "💸";
     inputs.push(
-        <div style={{ cursor: "pointer", margin: 2 }}>
+        <div style={{ cursor: "pointer", margin: 2, width: 1000}}>
             <Input
                 onChange={e => setReturnValue(e.target.value)}
                 defaultValue=""
@@ -123,7 +123,7 @@ export default function AddProject({ isActive, openAddProjectForm, closeAddProje
         <ModalContainer>
             <div className="container">
                 <div className="row">
-                    <div id = "modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize my-5">
+                    <div id="modal" style={{fontSize: 20}} className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize my-10">
                         Add Projects
                         <Row>
                             <Col span={40}>{inputs}</Col>
@@ -136,6 +136,7 @@ export default function AddProject({ isActive, openAddProjectForm, closeAddProje
 }
 
 const ModalContainer = styled.div`
+z-index: 9;
 position: fixed;
 top: 0;
 left: 0;
@@ -147,6 +148,5 @@ align-items: center;
 justify-content: center;
 #modal {
     background: white;
-
 }
 `;
