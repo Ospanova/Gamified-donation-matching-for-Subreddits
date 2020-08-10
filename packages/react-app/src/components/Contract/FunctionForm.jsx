@@ -118,7 +118,7 @@ export default function FunctionForm({ contractFunction, functionInfo, provider,
           span={8}
           style={{
             textAlign: "right",
-            opacity: 0.333,
+            // opacity: 0.333,
             paddingRight: 6,
             fontSize: 24,
           }}

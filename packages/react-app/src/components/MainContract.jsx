@@ -4,6 +4,8 @@ import { useContractLoader, useContractExistsAtAddress, useContractReader } from
 import Account from "./Account";
 import DisplayVariable from "./Contract/DisplayVariable";
 import FunctionForm from "./Contract/FunctionForm";
+import AddProject from "./Contract/AddProject";
+
 import Address from "./Address";
 import { Row, Col, Divider, Skeleton } from "antd";
 import { Transactor } from "../helpers";
@@ -43,7 +45,10 @@ export default function MainContract({ account, gasPrice, provider, price }) {
   const totalTokens = useContractReader(contracts, "MainContract", "totalTokens", 1777);
 
   const [projects, setProjects] = useState();
+  const [addProjectForm, setAddProjectForm] = useState(false);
 
+  const openAddProjectForm = () => setAddProjectForm(true)
+  const closeAddProjectForm = () => setAddProjectForm(false)
   const refreshProjects = useCallback(async () => {
     try {
       let np = projects ? projects.slice() : [];
@@ -165,7 +170,18 @@ export default function MainContract({ account, gasPrice, provider, price }) {
               </Col>
             </Row>
             <Divider />
-
+            <button onClick={() => openAddProjectForm()}>add Project</button>
+            <AddProject
+              isActive={addProjectForm}
+              openAddProjectForm={openAddProjectForm}
+              closeAddProjectForm={closeAddProjectForm}
+              key={"addProject"}
+              contractFunction={contract["addProject"]}
+              functionInfo={Object.values(contract.interface.functions).find(x => x.name == "addProject")}
+              provider={provider}
+              gasPrice={gasPrice}
+            />
+            <Divider />
             <Row>
               <Col
                 span={8}
@@ -201,15 +217,7 @@ export default function MainContract({ account, gasPrice, provider, price }) {
               </Col>
             </Row>
             <Divider />
-
-            <FunctionForm
-              key={"addProject"}
-              contractFunction={contract["addProject"]}
-              functionInfo={Object.values(contract.interface.functions).find(x => x.name == "addProject")}
-              provider={provider}
-              gasPrice={gasPrice}
-            />
-
+           
           </div>
         )
     }
